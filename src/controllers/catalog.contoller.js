@@ -64,5 +64,18 @@ const searchCatalog = async(req,res) =>{
     }
 }
 
+const getMostSoldBookInCategory = async(req,res)=>{
+    try {
+        const mostSoldBook = await CatalogServiceInstance.mostSoldBookByCategory(req.body.category)
+        if(searchResult){
+            res.status(200).send({message: "Most sold book found", success:true,  data:mostSoldBook})
+        }else{
+            res.status(404).send({message: "Most sold book not found", success:false})
+        }
+    } catch (error) {
+        throw new Error(" Cannot find book", error)
+        
+    }
+}
 
-module.exports  = {addCatalog, listOfCategory, allCategoryList, searchCatalog}
+module.exports  = {addCatalog, listOfCategory, allCategoryList, searchCatalog, getMostSoldBookInCategory}

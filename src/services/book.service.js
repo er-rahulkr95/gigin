@@ -42,6 +42,16 @@ class BookCatalogService {
             
         }
     }
+
+    mostSoldBookByCategory = async(category)=>{
+        try {
+            const bookSold = await BookCatalog.find({category:category}).sort({soldCount:-1}).limit(1).populate("authorId")
+            return bookSold
+        } catch (error) {
+            throw new Error("Cannot get book")
+            
+        }
+    }
 }
 
 

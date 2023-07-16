@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {addAuthor, authorsList} = require("../controllers/author.controller")
-const {addCatalog, listOfCategory,allCategoryList, searchCatalog} = require("../controllers/catalog.contoller")
+const {addCatalog, listOfCategory,allCategoryList, searchCatalog, getMostSoldBookInCategory} = require("../controllers/catalog.contoller")
 
 
 
@@ -18,4 +18,5 @@ router.get("catalog/allCategory", allCategoryList)
 // GET request "{{url}}/catalog/search?term=tilte'"
 router.get("catalog/search", searchCatalog)
 
+router.get("catalog/mostSoldBook",getMostSoldBookInCategory)
 module.exports = router;
