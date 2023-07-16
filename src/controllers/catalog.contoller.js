@@ -24,7 +24,7 @@ const listOfCategory = async(req,res)=>{
         if(categories.length){
             res.status(200).send({message: "categories fetched success", success:true,  data:categories})
         }else{
-            res.status(500).send({message: "categories Not Found", success:false})
+            res.status(404).send({message: "categories Not Found", success:false})
 
         }
     } catch (error) {
@@ -32,7 +32,37 @@ const listOfCategory = async(req,res)=>{
     }
 }
 
+const allCategoryList = async(req,res)=>{
+    try {
+        
+        const categories = await CatalogServiceInstance.categoryList();
+        if(categories.length){
+            res.status(200).send({message: "categories fetched success", success:true,  data:categories})
+        }else{
+            res.status(404).send({message: "categories Not Found", success:false})
+        }
+
+    } catch (error) {
+        throw new Error(" Cannot fetch all categories", error)
+        
+    }
+}
 
 
+const searchCatalog = async(req,res) =>{
+    try {
+        const searchTerm = req.query.term
+        const searchResult = await CatalogServiceInstance.catalogSearch(searchTerm);
+        if(searchResult.length){
+            res.status(200).send({message: "Book catalog record found", success:true,  data:searchResult})
+        }else{
+            res.status(404).send({message: "Book catalog record Not Found", success:false})
+        }
+    } catch (error) {
+        throw new Error(" Cannot search", error)
+        
+    }
+}
 
-module.exports  = {addCatalog, listOfCategory}
+
+module.exports  = {addCatalog, listOfCategory, allCategoryList, searchCatalog}

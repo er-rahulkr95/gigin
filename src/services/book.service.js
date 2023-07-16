@@ -22,6 +22,26 @@ class BookCatalogService {
        }
     };
 
+    categoryList = async()=>{
+        try {
+            const category = await BookCatalog.distinct("category")
+            return category
+        } catch (error) {
+            throw new Error("Cannot create book entity")
+            
+        }
+    }
+
+    catalogSearch = async(searchTerm)=>{
+        try {
+            
+            const searchResult = await BookCatalog.find({}).populate("authorId").or([{title:{$regex:searchTerm, $options: 'i'}}, {'authorId.name':{$regex:searchTerm, $options: 'i'}}])
+            return searchResult
+        } catch (error) {
+            throw new Error("Cannot search book or author")
+            
+        }
+    }
 }
 
 

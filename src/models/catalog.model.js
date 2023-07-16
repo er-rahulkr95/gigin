@@ -1,10 +1,10 @@
 
 const mongoose = require("mongoose")
-const {ObjecId} = mongoose.Schema
+const { ObjectId } = mongoose.Schema;
 
-const categorySchema = new mongoose.Schema({
-    category: {type: String, required:true}
-})
+// const categorySchema = new mongoose.Schema({
+//     category: {type: String, required:true}
+// })
 
 const bookCatalogSchema = new mongoose.Schema({
     title:{
@@ -13,7 +13,7 @@ const bookCatalogSchema = new mongoose.Schema({
         trim:true,
     },
     authorId:{
-        type: ObjecId,
+        type: ObjectId,
         ref: "authors"
     },
     publisher:{
@@ -24,9 +24,9 @@ const bookCatalogSchema = new mongoose.Schema({
     publishDate :{
         type:Date,
     },
-    category:[{type: categorySchema}],
+    category:[{type: String, required:true}],
     price: {type: Number, required:true},
-    soldCount: { type:Number}
+    soldCount: { type:Number, default:0}
 },{
     timestamps:true
 })
