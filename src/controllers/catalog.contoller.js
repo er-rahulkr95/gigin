@@ -13,7 +13,7 @@ const addCatalog = async(req, res)=>{
             }
             
         } catch (error) {
-            throw new Error(" Cannot Create catalog", error)
+            throw new Error(" Cannot Create catalog", {cause:error})
         }
 }
 
@@ -28,7 +28,7 @@ const listOfCategory = async(req,res)=>{
 
         }
     } catch (error) {
-        throw new Error(" Cannot fetch categories", error)
+        throw new Error(" Cannot fetch categories", {cause:error})
     }
 }
 
@@ -43,7 +43,7 @@ const allCategoryList = async(req,res)=>{
         }
 
     } catch (error) {
-        throw new Error(" Cannot fetch all categories", error)
+        throw new Error(" Cannot fetch all categories",{cause:error})
         
     }
 }
@@ -59,7 +59,7 @@ const searchCatalog = async(req,res) =>{
             res.status(404).send({message: "Book catalog record Not Found", success:false})
         }
     } catch (error) {
-        throw new Error(" Cannot search", error)
+        throw new Error(" Cannot search",{cause:error})
         
     }
 }
@@ -73,7 +73,7 @@ const getMostSoldBookInCategory = async(req,res)=>{
             res.status(404).send({message: "Most sold book not found", success:false})
         }
     } catch (error) {
-        throw new Error(" Cannot find book", error)
+        throw new Error(" Cannot find book", {cause:error})
         
     }
 }

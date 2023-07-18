@@ -13,7 +13,7 @@ const addAuthor = async(req, res)=>{
             }
             
         } catch (error) {
-            throw new Error(" Cannot Create author", error)
+            throw new Error(" Cannot Create author", {cause:error})
         }
 
 }
@@ -30,7 +30,7 @@ const authorsList = async(req,res)=>{
         }
         
     } catch (error) {
-        throw new Error(" Cannot fetch author", error)
+        throw new Error(" Cannot fetch author", {cause:error})
     }
 }
 
